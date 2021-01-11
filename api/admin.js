@@ -29,6 +29,7 @@ router.patch("/update", async (req, res) => {
         errRes(res, 400, "参数验证不通过", results.err)
     }
 })
+// 登录
 router.post("/login", async (req, res) => {
     let results = await login(req.body.username, req.body.password);
     if (results) {
@@ -42,6 +43,7 @@ router.post("/login", async (req, res) => {
         errRes(res, 400, "用户名和密码不匹配", {})
     }
 })
+// 查询个人信息
 router.get("/whoIam", async (req, res) => {
     let results = await getAdminByUsername(req.user.username);
     if (results) {
@@ -75,6 +77,11 @@ router.post("/uploadHeaderImg", multer({
     } else {
         errRes(res, 500, "服务器已收到你的请求", "正在处理中")
     }
+})
+
+// 验证是否有权限
+router.get("/verification",async (req,res)=>{
+    succeed(res, 200, "拥有权限", true)
 })
 
 
