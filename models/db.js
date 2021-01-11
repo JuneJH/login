@@ -1,8 +1,8 @@
 const {sqlLogger} = require("../log/loginit");
 const {Sequelize} = require('sequelize');
 
-const sequelize = new Sequelize("login","root","root",{
-    host:"121.36.51.141",
+const sequelize = new Sequelize("database","username","password",{
+    host:"host",
     dialect:"mysql",
     logging:(msg)=>{
         sqlLogger.info(msg)

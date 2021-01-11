@@ -1,18 +1,19 @@
 const md5 = require("md5");
 const Admin = require("../models/Admin");
 const validate = require("validate.js");
+
 //检查username是否存在
 validate.validators.isExistUserName = async (value) => {
     if (!value) return;
     const result = await getAdminByUsername(value);
     if (result) {
         return "^%{value}已存在,请选择专属您的用户名"
-    }
-    ;
+    };
 }
 // 检查密码是否符合规定
 validate.validators.checkPassword = async (value) => {
     if (!value) return;
+
     const reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/
     if (!reg.test(value)) {
         return "^您的密码格式在目前这个危险的世界并不安全"
@@ -23,6 +24,7 @@ getAdminByUsername = async function (username) {
     return result ? result.toJSON() : null;
 }
 exports.getAdminByUsername = getAdminByUsername;
+
 exports.addAdmin = async function (obj) {
     // 验证是否为标准的格式
     const rules = {
